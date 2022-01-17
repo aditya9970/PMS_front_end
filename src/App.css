@@ -1,6 +1,5 @@
-.App {
-  min-height: 100vh;
-  min-width: 100vw;
+::-webkit-scrollbar {
+  display: none;
 }
 
 .App-logo {
@@ -39,11 +38,64 @@
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   z-index: -1;
   height: 50vh;
-  width: 100%;
+  width: 100vw;
   border-radius: 0 0 0 100px;
+}
+
+td {
+  min-width: 100px;
+  padding: 2px 4px;
+  width: max-content;
+}
+
+option {
+  color: black;
+  margin: 2px 4px;
+}
+input:focus,
+option:focus,
+select:focus {
+  border: none;
+}
+/* 
+i {
+  transition: all 0.75s ease-in;
+} */
+
+/* animations classes */
+
+.fade-in-fwd {
+  -webkit-animation: fade-in-fwd 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in-fwd 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+/* animation keyframes */
+@-webkit-keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+    transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+    transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    opacity: 1;
+  }
 }

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginComponent = () => {
   return (
@@ -19,6 +21,7 @@ const LoginForm = () => {
 
   const handleChange = () => {
     setValues({ ...values, message: "" });
+    toast.dismiss();
   };
 
   const handleLogin = (e) => {
@@ -34,14 +37,30 @@ const LoginForm = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if (data.err) setValues({ ...values, message: data.err });
-        else {
-          setValues({
-            ...values,
-            message: data.message + "redirecting in 5 seconds",
+        if (data.error)
+          toast.error(data.error, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
           });
+        else {
+          toast.success(
+            <p>
+              {data.message} <br />
+              Redirecting in 5 second"
+            </p>,
+            {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+            }
+          );
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/projects/create");
           }, 5000);
         }
       });
@@ -119,10 +138,10 @@ const PasswordIcon = ({ show, onClick }) => {
   return (
     <span
       onClick={onClick}
-      className="absolute bg-gray-100"
+      className="absolute cursor-pointer  text-gray-500 text-sm "
       style={{ transform: "translate(0, -50%)", top: "50%", right: "10px" }}
     >
-      {show ? <i class="fas fa-eye"></i> : <i class="fas fa-eye-slash"></i>}
+      {show ? "**" : "AB"}
     </span>
   );
 };
